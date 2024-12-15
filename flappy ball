@@ -1,0 +1,38 @@
+import pgzrun
+WIDTH=800
+HEIGHT=800
+TITLE="flappy ball"
+gravity=30
+class circle():
+    def __init__(self,raidis,collor,posx,posy,vx,vy):
+        self.raidis=raidis
+        self.collor=collor
+        self.posx=posx
+        self.posy=posy
+        self.vx=vx
+        self.vy=vy
+    def draw(self):
+        screen.draw.filled_circle((self.posx,self.posy),self.raidis,self.collor)
+circle1=circle(50,"red",50,50,200,0)
+def draw():
+    screen.fill("black")
+    circle1.draw()
+
+def on_mouse_down(pos):
+    circle1.vy=-100
+
+def update(dt):
+    uy=circle1.vy
+    circle1.vy += gravity *dt
+    circle1.posy += (uy + circle1.vy) * 0.5 * dt
+    circle1.posx += circle1.vx * dt
+    if circle1.posx>750:
+        circle1.posx=750
+        circle1.vx*=-1
+    if circle1.posx<50:
+        circle1.posx=50
+        circle1.vx*=-1
+    if circle1.posy>750:
+        circle1.posy=750
+        circle1.vy*=-0.5
+pgzrun.go()
